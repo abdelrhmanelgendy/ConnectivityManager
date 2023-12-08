@@ -16,11 +16,7 @@ android {
     }
 
 
-    publishing{
-        singleVariant("release"){
-            withSourcesJar()
-        }
-    }
+ 
 
     buildTypes {
         release {
@@ -47,19 +43,18 @@ dependencies {
     implementation("com.google.android.material:material:1.10.0")
 }
 
-afterEvaluate{
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.github.abdelrhman" // Replace with your group ID
-                artifactId = "connectivity-manager" // Replace with your artifact ID
-                version = android.defaultConfig.versionName
-            }
-        }
-        repositories {
-            mavenLocal()
-        }
-    }
 
+
+configure<PublishingExtension> {
+    publications.create<MavenPublication>("myPlugin") {
+        groupId = "com.github.abdelrhman"
+        artifactId = "connectivity-manager"
+        version = android.defaultConfig.versionName
+        pom.packaging = "jar"
+        artifact("$buildDir/libs/MyPlugin.jar")
+
+    }
+    repositories {
+        mavenLocal()
+    }
 }
