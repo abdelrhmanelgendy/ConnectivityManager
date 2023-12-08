@@ -32,6 +32,7 @@ class NetworkConnectivityObserver(
 
     override fun observe(): Flow<Status> {
         val hardwareAvailable = checkInternetConnectivity(connectivityManager)
+
         return callbackFlow {
             val callback = NetworkCallback.createNetworkCallback(this,
                 onHardwareAvailable = {

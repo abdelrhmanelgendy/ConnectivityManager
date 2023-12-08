@@ -16,7 +16,6 @@ internal object NetworkCallback {
         return object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
-                println("onAvailable")
                 flow.launch {
                     onHardwareAvailable()
                 }
@@ -24,8 +23,6 @@ internal object NetworkCallback {
 
             override fun onLosing(network: Network, maxMsToLive: Int) {
                 super.onLosing(network, maxMsToLive)
-                println("onLosing")
-
                 flow.launch {
                     flow.send(ConnectivityObserver.Status.Losing)
                 }
@@ -33,7 +30,6 @@ internal object NetworkCallback {
 
             override fun onLost(network: Network) {
                 super.onLost(network)
-                println("onLost")
                 flow.launch {
                     onHardwareUnAvailable()
                 }
@@ -41,8 +37,6 @@ internal object NetworkCallback {
 
             override fun onUnavailable() {
                 super.onUnavailable()
-                println("onUnavailable")
-
                 flow.launch {
                     onHardwareUnAvailable()
                 }
