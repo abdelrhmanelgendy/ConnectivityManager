@@ -15,6 +15,13 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+
+    publishing{
+        singleVariant("release"){
+            withSourcesJar()
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -50,5 +57,9 @@ afterEvaluate{
                 version = android.defaultConfig.versionName
             }
         }
+        repositories {
+            mavenLocal()
+        }
     }
+
 }
