@@ -16,16 +16,16 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import net.sbs.internetchecker.domain.ConnectivityObserver
-import net.sbs.internetchecker.domain.ConnectivityObserver.Status
+import net.sbs.internetchecker.domain.IConnectivityObserver
+import net.sbs.internetchecker.domain.IConnectivityObserver.Status
 import net.sbs.internetchecker.domain.IInternetConnectivityChecker
 
 
-class NetworkConnectivityObserver(
+class ConnectivityObserver(
     private val lifecycleOwner: LifecycleOwner, context: Context,
     private val checkIntervalMillis: Long = 5000L, private val internetConnectivityChecker: IInternetConnectivityChecker,
     private val withLogger: Boolean = true
-) : ConnectivityObserver {
+) : IConnectivityObserver {
     private var internetConnectivityJob: Job? = null
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

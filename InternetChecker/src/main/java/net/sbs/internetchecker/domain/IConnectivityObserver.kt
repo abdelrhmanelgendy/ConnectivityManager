@@ -2,7 +2,7 @@ package net.sbs.internetchecker.domain
 
 import kotlinx.coroutines.flow.Flow
 
-interface ConnectivityObserver {
+interface IConnectivityObserver {
     fun observe(): Flow<Status>
 
     enum class Status {
