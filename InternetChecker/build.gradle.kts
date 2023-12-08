@@ -16,7 +16,7 @@ android {
     }
 
 
- 
+
 
     buildTypes {
         release {
@@ -46,15 +46,25 @@ dependencies {
 
 
 configure<PublishingExtension> {
-    publications.create<MavenPublication>("myPlugin") {
+    publications.create<MavenPublication>("release") {
         groupId = "com.github.abdelrhman"
         artifactId = "connectivity-manager"
         version = android.defaultConfig.versionName
         pom.packaging = "jar"
-        artifact("$buildDir/libs/MyPlugin.jar")
+        artifact("$buildDir/outputs/aar/InternetChecker-release.aar")
+
+        pom {
+            packaging = "aar"
+            // Add any other necessary information to the POM file
+        }
 
     }
     repositories {
-        mavenLocal()
+        // Use JitPack or other remote repository URL here
+        maven {
+            name = "jitpack"
+            url = uri("https://jitpack.io")
+        }
+        // Other repositories if needed...
     }
 }
